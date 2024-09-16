@@ -1,10 +1,12 @@
 import './App.css';
-import logo from '../logo.svg';
+import logo from '../logo.jpg';
+
+import Header from './Header';
 
 function App() {
     return (
         <div>
-            <h1>Placeholder</h1>
+            <Header pageTitle="City Manager" logoSrc={logo}>Placeholder</Header>
         </div>
     );
 }
