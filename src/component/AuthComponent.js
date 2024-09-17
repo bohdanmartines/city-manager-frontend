@@ -41,7 +41,7 @@ export default class AuthComponent extends React.Component {
     render() {
         return (
             <div className="row justify-content-center">
-                <div className="col-4">
+                <div className="col-4 mt-3">
                     <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button className={classNames("nav-link", this.state.active === "login" ? "active" : "")}
