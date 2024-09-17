@@ -3,7 +3,7 @@ import * as React from "react";
 import WelcomeContent from "./WelcomeContent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
-import {request, setAuthToken} from "../backend_client";
+import {request, setAuthTokens, clearAuthTokens} from "../backend_client";
 import Buttons from "./Buttons";
 
 export default class AppContent extends React.Component {
@@ -21,6 +21,7 @@ export default class AppContent extends React.Component {
 
     logout = () => {
         this.setState({activeComponent: "welcome"});
+        clearAuthTokens();
     }
 
     onLogin = (e, email, password) => {
@@ -30,9 +31,8 @@ export default class AppContent extends React.Component {
             {email: email, password: password}
         ).then((response) => {
                 this.setState({activeComponent: "protected"});
-                setAuthToken(response.data.token);
-            }
-        ).catch((error) => {
+                setAuthTokens(response.data.accessToken, response.data.refreshToken);
+        }).catch((error) => {
             this.setState({activeComponent: "welcome"});
         });
     }
@@ -48,9 +48,10 @@ export default class AppContent extends React.Component {
                 password: password,
                 confirmPassword: passwordConfirmation
             }
-        ).then((response) =>
-            this.setState({activeComponent: "protected"})
-        ).catch((error) => {
+        ).then((response) => {
+            this.setState({activeComponent: "protected"});
+            setAuthTokens(response.data.accessToken, response.data.refreshToken);
+        }).catch((error) => {
             this.setState({activeComponent: "welcome"});
         });
     }
