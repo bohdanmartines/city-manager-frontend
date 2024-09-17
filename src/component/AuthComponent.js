@@ -24,7 +24,7 @@ export default class AuthComponent extends React.Component {
     }
 
     onSubmitLogin = (event) => {
-        this.state.onLogin(event, this.state.username, this.state.password);
+        this.state.onLogin(event, this.state.email, this.state.password);
     }
 
     onSubmitRegister = (event) => {
@@ -32,7 +32,7 @@ export default class AuthComponent extends React.Component {
             event,
             this.state.name,
             this.state.surname,
-            this.state.username,
+            this.state.email,
             this.state.password,
             this.state.passwordConfirm
         );
@@ -61,14 +61,14 @@ export default class AuthComponent extends React.Component {
                             id="pills-login">
                             <form onSubmit={this.onSubmitLogin} id="login-form">
                                 <div className="form-outline">
-                                    <input type="text" id="username" name="username" placeholder="Username"
+                                    <input type="text" id="loginEmail" name="email" placeholder="Email"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="username" className="form-label">Username</label>
+                                    <label htmlFor="loginEmail" className="form-label">Email</label>
                                 </div>
                                 <div className="form-outline">
-                                    <input type="password" id="password" name="password" placeholder="Password"
+                                    <input type="password" id="loginPassword" name="password" placeholder="Password"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <label htmlFor="loginPassword" className="form-label">Password</label>
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-block">Sign in</button>
                             </form>
@@ -89,9 +89,9 @@ export default class AuthComponent extends React.Component {
                                     <label htmlFor="surname" className="form-label">Surname</label>
                                 </div>
                                 <div className="form-outline">
-                                    <input type="text" id="username" name="username" placeholder="Username"
+                                    <input type="text" id="email" name="email" placeholder="Email"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="username" className="form-label">Username</label>
+                                    <label htmlFor="email" className="form-label">Email</label>
                                 </div>
                                 <div className="form-outline">
                                     <input type="password" id="password" name="password" placeholder="Password"
@@ -99,9 +99,9 @@ export default class AuthComponent extends React.Component {
                                     <label htmlFor="password" className="form-label">Password</label>
                                 </div>
                                 <div className="form-outline">
-                                    <input type="password" id="passwordConirm" name="passwordConirm" placeholder="Confirm password"
+                                    <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm password"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="passwordConirm" className="form-label">Confirm password</label>
+                                    <label htmlFor="passwordConfirm" className="form-label">Confirm password</label>
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-block">Sign up</button>
                             </form>

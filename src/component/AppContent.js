@@ -3,7 +3,7 @@ import * as React from "react";
 import WelcomeContent from "./WelcomeContent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
-import {request} from "../backend_client";
+import {request, setAuthToken} from "../backend_client";
 import Buttons from "./Buttons";
 
 export default class AppContent extends React.Component {
@@ -23,31 +23,33 @@ export default class AppContent extends React.Component {
         this.setState({activeComponent: "welcome"});
     }
 
-    onLogin = (e, username, password) => {
+    onLogin = (e, email, password) => {
         e.preventDefault();
         request("auth/login",
             "POST",
-            {username: username, password: password}
-        ).then((response) =>
-            this.setState({activeComponent: "login"})
+            {email: email, password: password}
+        ).then((response) => {
+                this.setState({activeComponent: "protected"});
+                setAuthToken(response.data.token);
+            }
         ).catch((error) => {
             this.setState({activeComponent: "welcome"});
         });
     }
 
-    onRegister = (e, name, surname, username, password, passwordConfirmation) => {
+    onRegister = (e, name, surname, email, password, passwordConfirmation) => {
         e.preventDefault();
         request("auth/register",
             "POST",
             {
                 name: name,
                 surname: surname,
-                username: username,
+                email: email,
                 password: password,
-                passwordConfirmation: passwordConfirmation
+                confirmPassword: passwordConfirmation
             }
         ).then((response) =>
-            this.setState({activeComponent: "login"})
+            this.setState({activeComponent: "protected"})
         ).catch((error) => {
             this.setState({activeComponent: "welcome"});
         });
