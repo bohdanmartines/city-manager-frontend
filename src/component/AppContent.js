@@ -2,6 +2,7 @@ import * as React from "react";
 
 import WelcomeContent from "./WelcomeContent";
 import ProtectedContent from "./ProtectedContent";
+import AuthComponent from "./AuthComponent";
 
 export default class AppContent extends React.Component {
     render() {
@@ -9,6 +10,7 @@ export default class AppContent extends React.Component {
             <div>
                 <WelcomeContent />
                 <ProtectedContent />
+                <AuthComponent />
             </div>
         );
     }
