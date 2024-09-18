@@ -11,7 +11,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeComponent: "welcome"
+            activeComponent: "login"
         }
     }
 
@@ -26,7 +26,8 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <Header pageTitle="City Manager" logoSrc={logo}>Placeholder</Header>
+                <Header pageTitle="City Manager" logoSrc={logo} getActiveComponent={this.getActiveComponent}
+                        setActiveComponent={this.setActiveComponent}>Placeholder</Header>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col">

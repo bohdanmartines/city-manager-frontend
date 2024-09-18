@@ -3,8 +3,7 @@ import * as React from "react";
 import WelcomeContent from "./WelcomeContent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
-import {request, setAuthTokens, clearAuthTokens} from "../backend_client";
-import Buttons from "./Buttons";
+import {request, setAuthTokens} from "../backend_client";
 
 export default class AppContent extends React.Component {
 
@@ -14,15 +13,6 @@ export default class AppContent extends React.Component {
             getActiveComponent: props.getActiveComponent,
             setActiveComponent: props.setActiveComponent
         }
-    }
-
-    login = () => {
-        this.state.setActiveComponent("login");
-    }
-
-    logout = () => {
-        this.state.setActiveComponent("welcome");
-        clearAuthTokens();
     }
 
     onLogin = (e, email, password) => {
@@ -60,7 +50,6 @@ export default class AppContent extends React.Component {
     render() {
         return (
             <div>
-                <Buttons login={this.login} logout={this.logout}/>
                 {this.state.getActiveComponent() === "welcome" && <WelcomeContent/>}
                 {this.state.getActiveComponent() === "protected" && <ProtectedContent/>}
                 {this.state.getActiveComponent() === "login" &&
