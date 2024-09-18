@@ -11,16 +11,17 @@ export default class AppContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeComponent: "welcome"
+            getActiveComponent: props.getActiveComponent,
+            setActiveComponent: props.setActiveComponent
         }
     }
 
     login = () => {
-        this.setState({activeComponent: "login"});
+        this.state.setActiveComponent("login");
     }
 
     logout = () => {
-        this.setState({activeComponent: "welcome"});
+        this.state.setActiveComponent("welcome");
         clearAuthTokens();
     }
 
@@ -30,10 +31,10 @@ export default class AppContent extends React.Component {
             "POST",
             {email: email, password: password}
         ).then((response) => {
-                this.setState({activeComponent: "protected"});
-                setAuthTokens(response.data.accessToken, response.data.refreshToken);
+            this.state.setActiveComponent("protected");
+            setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            this.setState({activeComponent: "welcome"});
+            this.state.setActiveComponent("welcome");
         });
     }
 
@@ -49,10 +50,10 @@ export default class AppContent extends React.Component {
                 confirmPassword: passwordConfirmation
             }
         ).then((response) => {
-            this.setState({activeComponent: "protected"});
+            this.state.setActiveComponent("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            this.setState({activeComponent: "welcome"});
+            this.state.setActiveComponent("welcome");
         });
     }
 
@@ -60,9 +61,9 @@ export default class AppContent extends React.Component {
         return (
             <div>
                 <Buttons login={this.login} logout={this.logout}/>
-                {this.state.activeComponent === "welcome" && <WelcomeContent/>}
-                {this.state.activeComponent === "protected" && <ProtectedContent/>}
-                {this.state.activeComponent === "login" &&
+                {this.state.getActiveComponent() === "welcome" && <WelcomeContent/>}
+                {this.state.getActiveComponent() === "protected" && <ProtectedContent/>}
+                {this.state.getActiveComponent() === "login" &&
                     <AuthComponent onLogin={this.onLogin} onRegister={this.onRegister}/>}
             </div>
         );
