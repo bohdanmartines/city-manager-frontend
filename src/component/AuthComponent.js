@@ -61,16 +61,16 @@ export default class AuthComponent extends React.Component {
                             id="pills-login">
                             <form onSubmit={this.onSubmitLogin} id="login-form">
                                 <div className="form-outline">
+                                    <label htmlFor="loginEmail">Email</label>
                                     <input type="text" id="loginEmail" name="email" placeholder="Email"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="loginEmail" className="form-label">Email</label>
                                 </div>
                                 <div className="form-outline">
+                                    <label htmlFor="loginPassword">Password</label>
                                     <input type="password" id="loginPassword" name="password" placeholder="Password"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="loginPassword" className="form-label">Password</label>
                                 </div>
-                                <button type="submit" className="btn btn-primary btn-block">Sign in</button>
+                                <button type="submit" className="btn btn-primary btn-block form-button">Sign in</button>
                             </form>
                         </div>
 
@@ -79,31 +79,31 @@ export default class AuthComponent extends React.Component {
                             id="pills-register">
                             <form onSubmit={this.onSubmitRegister} id="register-form">
                                 <div className="form-outline">
+                                    <label htmlFor="name">First name</label>
                                     <input type="text" id="name" name="name" placeholder="Name"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="name" className="form-label">First name</label>
                                 </div>
                                 <div className="form-outline">
+                                    <label htmlFor="surname">Surname</label>
                                     <input type="text" id="surname" name="surname" placeholder="Surname"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="surname" className="form-label">Surname</label>
                                 </div>
                                 <div className="form-outline">
+                                    <label htmlFor="email">Email</label>
                                     <input type="text" id="email" name="email" placeholder="Email"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="email" className="form-label">Email</label>
                                 </div>
                                 <div className="form-outline">
+                                    <label htmlFor="password">Password</label>
                                     <input type="password" id="password" name="password" placeholder="Password"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="password" className="form-label">Password</label>
                                 </div>
                                 <div className="form-outline">
+                                    <label htmlFor="passwordConfirm">Confirm password</label>
                                     <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm password"
                                            className="form-control" onChange={this.onChangeHandler}/>
-                                    <label htmlFor="passwordConfirm" className="form-label">Confirm password</label>
                                 </div>
-                                <button type="submit" className="btn btn-primary btn-block">Sign up</button>
+                                <button type="submit" className="btn btn-primary btn-block form-button">Sign up</button>
                             </form>
                         </div>
                     </div>
