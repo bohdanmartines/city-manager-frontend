@@ -3,7 +3,8 @@ import * as React from "react";
 import WelcomeContent from "./WelcomeContent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
-import {request, setAuthTokens} from "../backend_client";
+import {request} from "../backend_client";
+import {setAuthTokens} from "./session_state_helper";
 
 export default class AppContent extends React.Component {
 

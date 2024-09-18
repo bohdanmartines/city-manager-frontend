@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {clearAuthTokens} from "../backend_client";
+import {clearAuthTokens} from "./session_state_helper";
 
 export default class Header extends React.Component {
 
