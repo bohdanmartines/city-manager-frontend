@@ -29,7 +29,7 @@ export default class Header extends React.Component {
                     </div>
                     <div className="col-3"></div>
                     {this.state.getActiveComponent() === "protected" &&
-                        <button className="btn btn-outline-info col-1 my-4" onClick={this.logout}>Logout</button>}
+                        <button className="btn btn-outline-info col-1 my-5" onClick={this.logout}>Logout</button>}
                 </div>
             </header>
         );
