@@ -28,11 +28,12 @@ export default class Header extends React.Component {
                         <h1 className="App-title">{this.state.pageTitle}</h1>
                     </div>
                     <div className="col-3"></div>
-                    {this.state.getActiveComponent() === "protected" &&
-                        <button className="btn btn-outline-info col-1 my-5" onClick={this.logout}>Logout</button>}
+                    <div className="col-1 d-flex align-items-center">
+                        {this.state.getActiveComponent() === "protected" &&
+                            <button className="btn btn-outline-info" onClick={this.logout}>Logout</button>}
+                    </div>
                 </div>
             </header>
         );
     }
-
 }
