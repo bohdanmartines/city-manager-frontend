@@ -28,7 +28,7 @@ export default class ProtectedContent extends React.Component {
                         <div className="card-body">
                             <h5 className="card-title">Response from the backend</h5>
                             <ul>
-                                {this.state.data && this.state.data.map((line) => <li>{line}</li>)}
+                                {this.state.data && this.state.data.map((line) => <li key={line}>{line}</li>)}
                             </ul>
                         </div>
                     </div>
