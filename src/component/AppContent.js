@@ -3,7 +3,7 @@ import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 
 export default function AppContent({setLoggedIn}) {
 
@@ -46,7 +46,7 @@ export default function AppContent({setLoggedIn}) {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<ProtectedContent/>}></Route>
+                <Route path="/" element={<Navigate to="/protected" />}></Route>
                 <Route path="/protected" element={<ProtectedContent/>}></Route>
                 <Route path="/login" element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
                 <Route path="/error" element={<ErrorComponent/>}></Route>
