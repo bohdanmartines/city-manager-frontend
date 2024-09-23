@@ -1,6 +1,8 @@
 import * as React from 'react';
+import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
-import {useState} from "react";
+import {isAuthenticated} from "../helper/session_state_helper";
 
 export default function AuthComponent({onLogin, onRegister}) {
 
@@ -10,6 +12,14 @@ export default function AuthComponent({onLogin, onRegister}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            navigate("/protected");
+        }
+    }, [navigate]);
 
     const onSubmitLogin = (event) => {
         onLogin(event, email, password);
