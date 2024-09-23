@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {clearAuthTokens} from "../helper/session_state_helper";
-import {useNavigate} from "react-router-dom";
-import {LOGIN} from "../helper/path";
+import {Link, useNavigate} from "react-router-dom";
+import {HOME, LOGIN} from "../helper/path";
 
 export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
 
@@ -17,7 +17,7 @@ export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
         <header className="App-header">
             <div className="row">
                 <div className="col-4"></div>
-                <div className="col-4 text-center">
+                <div className="col-4 text-center" style={{cursor: 'pointer'}} onClick={() => navigate(HOME)}>
                     <img src={logoSrc} alt="logo" className="App-logo"/>
                     <h1 className="App-title">{pageTitle}</h1>
                 </div>
