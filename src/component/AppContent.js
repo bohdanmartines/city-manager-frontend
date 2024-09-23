@@ -3,8 +3,11 @@ import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
+import {Route, Routes, useNavigate} from "react-router-dom";
 
 export default function AppContent({activeComponent, setActiveComponent}) {
+
+    const navigate = useNavigate();
 
     const onLogin = (e, email, password) => {
         e.preventDefault();
@@ -13,9 +16,11 @@ export default function AppContent({activeComponent, setActiveComponent}) {
             {email: email, password: password}
         ).then((response) => {
             setActiveComponent("protected");
+            navigate("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
             setActiveComponent("error");
+            navigate("error");
         });
     }
 
@@ -32,17 +37,22 @@ export default function AppContent({activeComponent, setActiveComponent}) {
             }
         ).then((response) => {
             setActiveComponent("protected");
+            navigate("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
             setActiveComponent("error");
+            navigate("error");
         });
     }
 
     return (
         <div>
-            {activeComponent === "error" && <ErrorComponent/>}
-            {activeComponent === "protected" && <ProtectedContent/>}
-            {activeComponent === "login" && <AuthComponent onLogin={onLogin} onRegister={onRegister}/>}
+            <Routes>
+                <Route path="/" element={<ProtectedContent/>}></Route>
+                <Route path="/protected" element={<ProtectedContent/>}></Route>
+                <Route path="/login" element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
+                <Route path="/error" element={<ErrorComponent/>}></Route>
+            </Routes>
         </div>
     );
 }

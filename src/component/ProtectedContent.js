@@ -1,20 +1,27 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {request} from "../helper/backend_client";
-import {useState, useEffect } from "react";
+import {isAuthenticated} from "../helper/session_state_helper";
+import {useNavigate} from "react-router-dom";
 
 export default function ProtectedContent() {
 
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        request(
-            "mock/messages",
-            "GET",
-            {}
-        ).then(response => {
-            setData(response.data);
-        });
-    }, [])
+        if (!isAuthenticated()) {
+            navigate("/login")
+        } else {
+            request(
+                "mock/messages",
+                "GET",
+                {}
+            ).then(response => {
+                setData(response.data);
+            });
+        }
+    }, [navigate])
 
     return (
         <div className="row justify-content-md-center">

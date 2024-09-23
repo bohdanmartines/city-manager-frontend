@@ -1,10 +1,14 @@
 import * as React from 'react';
 import {clearAuthTokens} from "../helper/session_state_helper";
+import {useNavigate} from "react-router-dom";
 
 export default function Header({logoSrc, pageTitle, activeComponent, setActiveComponent}) {
 
+    const navigate = useNavigate();
+
     const logout = () => {
         setActiveComponent("login");
+        navigate("login");
         clearAuthTokens();
     }
 
