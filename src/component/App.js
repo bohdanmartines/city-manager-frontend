@@ -24,8 +24,7 @@ export default function App() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col">
-                        <AppContent activeComponent={activeComponent}
-                                    setActiveComponent={updateActiveComponent}/>
+                        <AppContent setActiveComponent={updateActiveComponent}/>
                     </div>
                 </div>
             </div>

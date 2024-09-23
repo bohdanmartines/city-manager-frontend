@@ -5,7 +5,7 @@ import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 import {Route, Routes, useNavigate} from "react-router-dom";
 
-export default function AppContent({activeComponent, setActiveComponent}) {
+export default function AppContent({setActiveComponent}) {
 
     const navigate = useNavigate();
 
