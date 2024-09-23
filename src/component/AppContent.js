@@ -5,7 +5,7 @@ import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 import {Route, Routes, useNavigate} from "react-router-dom";
 
-export default function AppContent({setActiveComponent}) {
+export default function AppContent({setLoggedIn}) {
 
     const navigate = useNavigate();
 
@@ -15,11 +15,10 @@ export default function AppContent({setActiveComponent}) {
             "POST",
             {email: email, password: password}
         ).then((response) => {
-            setActiveComponent("protected");
+            setLoggedIn(true);
             navigate("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            setActiveComponent("error");
             navigate("error");
         });
     }
@@ -36,11 +35,10 @@ export default function AppContent({setActiveComponent}) {
                 confirmPassword: passwordConfirmation
             }
         ).then((response) => {
-            setActiveComponent("protected");
+            setLoggedIn(true);
             navigate("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            setActiveComponent("error");
             navigate("error");
         });
     }

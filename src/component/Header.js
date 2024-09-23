@@ -2,12 +2,12 @@ import * as React from 'react';
 import {clearAuthTokens} from "../helper/session_state_helper";
 import {useNavigate} from "react-router-dom";
 
-export default function Header({logoSrc, pageTitle, activeComponent, setActiveComponent}) {
+export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
 
     const navigate = useNavigate();
 
     const logout = () => {
-        setActiveComponent("login");
+        setLoggedIn(false);
         navigate("login");
         clearAuthTokens();
     }
@@ -22,8 +22,7 @@ export default function Header({logoSrc, pageTitle, activeComponent, setActiveCo
                 </div>
                 <div className="col-3"></div>
                 <div className="col-1 d-flex align-items-center">
-                    {activeComponent === "protected" &&
-                        <button className="btn btn-outline-info" onClick={logout}>Logout</button>}
+                    {loggedIn && <button className="btn btn-outline-info" onClick={logout}>Logout</button>}
                 </div>
             </div>
         </header>

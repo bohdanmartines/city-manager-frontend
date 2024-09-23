@@ -8,23 +8,21 @@ import {useState} from "react";
 
 export default function App() {
 
-    const [activeComponent, setActiveComponent] = useState(() => {
-        let authenticated = isAuthenticated();
-        return authenticated ? "protected" : "login";
+    const [loggedIn, setLoggedIn] = useState(() => {
+        return isAuthenticated();
     });
 
-    const updateActiveComponent = (activeComponent) => {
-        setActiveComponent(activeComponent);
+    const updateLoggedIn = (loggedIn) => {
+        setLoggedIn(loggedIn);
     }
 
     return (
         <div>
-            <Header pageTitle="City Manager" logoSrc={logo} activeComponent={activeComponent}
-                    setActiveComponent={updateActiveComponent}/>
+            <Header pageTitle="City Manager" logoSrc={logo} loggedIn={loggedIn} setLoggedIn={updateLoggedIn}/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col">
-                        <AppContent setActiveComponent={updateActiveComponent}/>
+                        <AppContent setLoggedIn={updateLoggedIn}/>
                     </div>
                 </div>
             </div>
