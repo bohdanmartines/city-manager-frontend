@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {useNavigate} from "react-router-dom";
+import {LOGIN} from "../helper/path";
 
 export default function ProtectedContent() {
 
@@ -11,7 +12,7 @@ export default function ProtectedContent() {
 
     useEffect(() => {
         if (!isAuthenticated()) {
-            navigate("/login")
+            navigate(LOGIN)
         } else {
             request(
                 "mock/messages",

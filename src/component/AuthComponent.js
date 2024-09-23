@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {isAuthenticated} from "../helper/session_state_helper";
+import {HOME} from "../helper/path";
 
 export default function AuthComponent({onLogin, onRegister}) {
 
@@ -17,7 +18,7 @@ export default function AuthComponent({onLogin, onRegister}) {
 
     useEffect(() => {
         if (isAuthenticated()) {
-            navigate("/protected");
+            navigate(HOME);
         }
     }, [navigate]);
 

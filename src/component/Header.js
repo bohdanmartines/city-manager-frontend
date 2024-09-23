@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {clearAuthTokens} from "../helper/session_state_helper";
 import {useNavigate} from "react-router-dom";
+import {LOGIN} from "../helper/path";
 
 export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
 
@@ -8,7 +9,7 @@ export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
 
     const logout = () => {
         setLoggedIn(false);
-        navigate("login");
+        navigate(LOGIN);
         clearAuthTokens();
     }
 

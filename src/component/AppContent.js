@@ -4,6 +4,7 @@ import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
+import {HOME, LOGIN, ROOT} from "../helper/path";
 
 export default function AppContent({setLoggedIn}) {
 
@@ -16,7 +17,7 @@ export default function AppContent({setLoggedIn}) {
             {email: email, password: password}
         ).then((response) => {
             setLoggedIn(true);
-            navigate("protected");
+            navigate(HOME);
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
             navigate("error");
@@ -36,7 +37,7 @@ export default function AppContent({setLoggedIn}) {
             }
         ).then((response) => {
             setLoggedIn(true);
-            navigate("protected");
+            navigate(HOME);
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
             navigate("error");
@@ -46,9 +47,9 @@ export default function AppContent({setLoggedIn}) {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Navigate to="/protected" />}></Route>
-                <Route path="/protected" element={<ProtectedContent/>}></Route>
-                <Route path="/login" element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
+                <Route path={ROOT} element={<Navigate to={HOME} />}></Route>
+                <Route path={HOME} element={<ProtectedContent/>}></Route>
+                <Route path={LOGIN} element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
                 <Route path="/error" element={<ErrorComponent/>}></Route>
             </Routes>
         </div>
