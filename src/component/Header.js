@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {clearAuthTokens} from "../helper/session_state_helper";
 
-export default function Header({logoSrc, pageTitle, getActiveComponent, setActiveComponent}) {
+export default function Header({logoSrc, pageTitle, activeComponent, setActiveComponent}) {
 
     const logout = () => {
         setActiveComponent("login");
@@ -18,7 +18,7 @@ export default function Header({logoSrc, pageTitle, getActiveComponent, setActiv
                 </div>
                 <div className="col-3"></div>
                 <div className="col-1 d-flex align-items-center">
-                    {getActiveComponent() === "protected" &&
+                    {activeComponent === "protected" &&
                         <button className="btn btn-outline-info" onClick={logout}>Logout</button>}
                 </div>
             </div>

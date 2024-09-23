@@ -1,44 +1,34 @@
-import * as React from "react";
-
 import './App.css';
 
 import logo from '../logo.jpg';
 import Header from './Header';
 import AppContent from "./AppContent";
 import {isAuthenticated} from "../helper/session_state_helper";
+import {useState} from "react";
 
-export default class App extends React.Component {
+export default function App() {
 
-    constructor(props) {
-        super(props);
+    const [activeComponent, setActiveComponent] = useState(() => {
         let authenticated = isAuthenticated();
-        this.state = {
-            activeComponent: authenticated ? "protected" : "login"
-        }
+        return authenticated ? "protected" : "login";
+    });
+
+    const updateActiveComponent = (activeComponent) => {
+        setActiveComponent(activeComponent);
     }
 
-    getActiveComponent = () => {
-        return this.state.activeComponent;
-    }
-
-    setActiveComponent = (activeComponent) => {
-        this.setState({activeComponent: activeComponent});
-    }
-
-    render() {
-        return (
-            <div>
-                <Header pageTitle="City Manager" logoSrc={logo} getActiveComponent={this.getActiveComponent}
-                        setActiveComponent={this.setActiveComponent}>Placeholder</Header>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col">
-                            <AppContent getActiveComponent={this.getActiveComponent}
-                                        setActiveComponent={this.setActiveComponent}/>
-                        </div>
+    return (
+        <div>
+            <Header pageTitle="City Manager" logoSrc={logo} activeComponent={activeComponent}
+                    setActiveComponent={updateActiveComponent}/>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col">
+                        <AppContent activeComponent={activeComponent}
+                                    setActiveComponent={updateActiveComponent}/>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }

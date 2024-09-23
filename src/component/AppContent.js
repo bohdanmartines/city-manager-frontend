@@ -4,7 +4,7 @@ import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 
-export default function AppContent({getActiveComponent, setActiveComponent}) {
+export default function AppContent({activeComponent, setActiveComponent}) {
 
     const onLogin = (e, email, password) => {
         e.preventDefault();
@@ -40,9 +40,9 @@ export default function AppContent({getActiveComponent, setActiveComponent}) {
 
     return (
         <div>
-            {getActiveComponent() === "error" && <ErrorComponent/>}
-            {getActiveComponent() === "protected" && <ProtectedContent/>}
-            {getActiveComponent() === "login" && <AuthComponent onLogin={onLogin} onRegister={onRegister}/>}
+            {activeComponent === "error" && <ErrorComponent/>}
+            {activeComponent === "protected" && <ProtectedContent/>}
+            {activeComponent === "login" && <AuthComponent onLogin={onLogin} onRegister={onRegister}/>}
         </div>
     );
 }
