@@ -1,39 +1,33 @@
 import * as React from "react";
 import {request} from "../helper/backend_client";
+import {useState, useEffect } from "react";
 
-export default class ProtectedContent extends React.Component {
+export default function ProtectedContent() {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        };
-    }
+    const [data, setData] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
         request(
             "mock/messages",
             "GET",
             {}
         ).then(response => {
-            this.setState({data: response.data});
+            setData(response.data);
         });
-    }
+    }, [])
 
-    render() {
-        return (
-            <div className="row justify-content-md-center">
-                <div className="col-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Response from the backend</h5>
-                            <ul>
-                                {this.state.data && this.state.data.map((line) => <li key={line}>{line}</li>)}
-                            </ul>
-                        </div>
+    return (
+        <div className="row justify-content-md-center">
+            <div className="col-4">
+                <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">Response from the backend</h5>
+                        <ul>
+                            {data && data.map((line) => <li key={line}>{line}</li>)}
+                        </ul>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
