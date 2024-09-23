@@ -1,35 +1,25 @@
-import * as React from "react";
-
 import ErrorComponent from "./ErrorComponent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 
-export default class AppContent extends React.Component {
+export default function AppContent({getActiveComponent, setActiveComponent}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            getActiveComponent: props.getActiveComponent,
-            setActiveComponent: props.setActiveComponent
-        }
-    }
-
-    onLogin = (e, email, password) => {
+    const onLogin = (e, email, password) => {
         e.preventDefault();
         request("auth/login",
             "POST",
             {email: email, password: password}
         ).then((response) => {
-            this.state.setActiveComponent("protected");
+            setActiveComponent("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            this.state.setActiveComponent("error");
+            setActiveComponent("error");
         });
     }
 
-    onRegister = (e, name, surname, email, password, passwordConfirmation) => {
+    const onRegister = (e, name, surname, email, password, passwordConfirmation) => {
         e.preventDefault();
         request("auth/register",
             "POST",
@@ -41,21 +31,18 @@ export default class AppContent extends React.Component {
                 confirmPassword: passwordConfirmation
             }
         ).then((response) => {
-            this.state.setActiveComponent("protected");
+            setActiveComponent("protected");
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            this.state.setActiveComponent("error");
+            setActiveComponent("error");
         });
     }
 
-    render() {
-        return (
-            <div>
-                {this.state.getActiveComponent() === "error" && <ErrorComponent/>}
-                {this.state.getActiveComponent() === "protected" && <ProtectedContent/>}
-                {this.state.getActiveComponent() === "login" &&
-                    <AuthComponent onLogin={this.onLogin} onRegister={this.onRegister}/>}
-            </div>
-        );
-    }
+    return (
+        <div>
+            {getActiveComponent() === "error" && <ErrorComponent/>}
+            {getActiveComponent() === "protected" && <ProtectedContent/>}
+            {getActiveComponent() === "login" && <AuthComponent onLogin={onLogin} onRegister={onRegister}/>}
+        </div>
+    );
 }
