@@ -51,6 +51,7 @@ export default function AppContent({setLoggedIn}) {
                 <Route path={HOME} element={<ProtectedContent/>}></Route>
                 <Route path={LOGIN} element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
                 <Route path="/error" element={<ErrorComponent/>}></Route>
+                <Route path="*" element={<ErrorComponent message="Page not found"/>}></Route>
             </Routes>
         </div>
     );
