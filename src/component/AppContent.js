@@ -4,7 +4,7 @@ import AuthComponent from "./AuthComponent";
 import {request} from "../helper/backend_client";
 import {setAuthTokens} from "../helper/session_state_helper";
 import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
-import {HOME, LOGIN, ROOT} from "../helper/path";
+import {ERROR, HOME, LOGIN, ROOT} from "../helper/path";
 
 export default function AppContent({setLoggedIn}) {
 
@@ -20,7 +20,7 @@ export default function AppContent({setLoggedIn}) {
             navigate(HOME);
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            navigate("error");
+            navigate(ERROR);
         });
     }
 
@@ -40,7 +40,7 @@ export default function AppContent({setLoggedIn}) {
             navigate(HOME);
             setAuthTokens(response.data.accessToken, response.data.refreshToken);
         }).catch((error) => {
-            navigate("error");
+            navigate(ERROR);
         });
     }
 
@@ -50,7 +50,7 @@ export default function AppContent({setLoggedIn}) {
                 <Route path={ROOT} element={<Navigate to={HOME} />}></Route>
                 <Route path={HOME} element={<ProtectedContent/>}></Route>
                 <Route path={LOGIN} element={<AuthComponent onLogin={onLogin} onRegister={onRegister}/>}></Route>
-                <Route path="/error" element={<ErrorComponent/>}></Route>
+                <Route path={ERROR} element={<ErrorComponent/>}></Route>
                 <Route path="*" element={<ErrorComponent message="Page not found"/>}></Route>
             </Routes>
         </div>
