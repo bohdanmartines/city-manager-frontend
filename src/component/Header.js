@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {clearAuthTokens} from "./session_state_helper";
+import {clearAuthTokens} from "../helper/session_state_helper";
 
 export default function Header({logoSrc, pageTitle, getActiveComponent, setActiveComponent}) {
 

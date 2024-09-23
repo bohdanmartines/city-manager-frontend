@@ -1,5 +1,5 @@
 import * as React from "react";
-import {request} from "../backend_client";
+import {request} from "../helper/backend_client";
 
 export default class ProtectedContent extends React.Component {
 

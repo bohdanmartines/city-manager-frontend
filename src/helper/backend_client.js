@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getAccessToken} from "./component/session_state_helper";
+import {getAccessToken} from "./session_state_helper";
 
 axios.defaults.baseURL = 'http://localhost:8080/api/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';

@@ -5,7 +5,7 @@ import './App.css';
 import logo from '../logo.jpg';
 import Header from './Header';
 import AppContent from "./AppContent";
-import {isAuthenticated} from "./session_state_helper";
+import {isAuthenticated} from "../helper/session_state_helper";
 
 export default class App extends React.Component {
 

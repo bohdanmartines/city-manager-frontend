@@ -3,8 +3,8 @@ import * as React from "react";
 import ErrorComponent from "./ErrorComponent";
 import ProtectedContent from "./ProtectedContent";
 import AuthComponent from "./AuthComponent";
-import {request} from "../backend_client";
-import {setAuthTokens} from "./session_state_helper";
+import {request} from "../helper/backend_client";
+import {setAuthTokens} from "../helper/session_state_helper";
 
 export default class AppContent extends React.Component {
 
