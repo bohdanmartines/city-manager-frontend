@@ -33,14 +33,19 @@ export default function AuthComponent({onLogin, onRegister}) {
     }
 
     const onSubmitRegister = (event) => {
-        onRegister(
-            event,
-            name,
-            surname,
-            email,
-            password,
-            passwordConfirm
-        );
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === true) {
+            onRegister(
+                name,
+                surname,
+                email,
+                password,
+                passwordConfirm
+            );
+        }
+        setValidated(true);
+
     }
 
     return (
@@ -64,7 +69,7 @@ export default function AuthComponent({onLogin, onRegister}) {
                         className={classNames("tab-pane", "fade", active === "login" ? "show active" : "")}
                         id="pills-login">
                         <Form noValidate validated={validated} onSubmit={onSubmitLogin}>
-                            <Form.Group controlId="formEmail">
+                            <Form.Group controlId="loginEmail">
                                 <Form.Label className="mb-0">Email</Form.Label>
                                 <Form.Control
                                     type="email"
@@ -77,7 +82,7 @@ export default function AuthComponent({onLogin, onRegister}) {
                                 <Form.Control.Feedback type="invalid">Please provide a valid
                                     email.</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group controlId="formPassword">
+                            <Form.Group controlId="loginPassword">
                                 <Form.Label className="mb-0">Password</Form.Label>
                                 <Form.Control
                                     type="password"
@@ -99,35 +104,71 @@ export default function AuthComponent({onLogin, onRegister}) {
                     <div
                         className={classNames("tab-pane", "fade", active === "register" ? "show active" : "")}
                         id="pills-register">
-                        <form onSubmit={onSubmitRegister} id="register-form">
-                            <div className="form-outline">
-                                <label htmlFor="name">First name</label>
-                                <input type="text" id="name" name="name" placeholder="Name"
-                                       className="form-control" onChange={(e) => setName(e.target.value)}/>
-                            </div>
-                            <div className="form-outline">
-                                <label htmlFor="surname">Surname</label>
-                                <input type="text" id="surname" name="surname" placeholder="Surname"
-                                       className="form-control" onChange={(e) => setSurname(e.target.value)}/>
-                            </div>
-                            <div className="form-outline">
-                                <label htmlFor="email">Email</label>
-                                <input type="text" id="email" name="email" placeholder="Email"
-                                       className="form-control" onChange={(e) => setEmail(e.target.value)}/>
-                            </div>
-                            <div className="form-outline">
-                                <label htmlFor="password">Password</label>
-                                <input type="password" id="password" name="password" placeholder="Password"
-                                       className="form-control" onChange={(e) => setPassword(e.target.value)}/>
-                            </div>
-                            <div className="form-outline">
-                                <label htmlFor="passwordConfirm">Confirm password</label>
-                                <input type="password" id="passwordConfirm" name="passwordConfirm"
-                                       placeholder="Confirm password"
-                                       className="form-control" onChange={(e) => setPasswordConfirm(e.target.value)}/>
-                            </div>
-                            <button type="submit" className="btn btn-primary btn-block form-button">Sign up</button>
-                        </form>
+                        <Form noValidate validated={validated} onSubmit={onSubmitRegister}>
+                            <Form.Group controlId="regName">
+                                <Form.Label className="mb-0">Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide your name.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="regSurname">
+                                <Form.Label className="mb-0">Surname</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Surname"
+                                    value={surname}
+                                    onChange={(e) => setSurname(e.target.value)}
+                                    required
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide your surname.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="regEmail">
+                                <Form.Label className="mb-0">Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="regPassword">
+                                <Form.Label className="mb-0">Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    minLength={8}
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Password must be minimum 8 characters
+                                    long.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="regConfirmPassword">
+                                <Form.Label className="mb-0">Confirm password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Confirm password"
+                                    value={passwordConfirm}
+                                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                                    required
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Password confirmation does not match.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Button type="submit" className="btn btn-primary btn-block form-button">Sign up</Button>
+                        </Form>
                     </div>
                 </div>
             </div>

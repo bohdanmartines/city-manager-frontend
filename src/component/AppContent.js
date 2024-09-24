@@ -23,8 +23,7 @@ export default function AppContent({setLoggedIn}) {
         });
     }
 
-    const onRegister = (e, name, surname, email, password, passwordConfirmation) => {
-        e.preventDefault();
+    const onRegister = (name, surname, email, password, passwordConfirmation) => {
         request("auth/register",
             "POST",
             {
