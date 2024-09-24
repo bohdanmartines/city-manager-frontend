@@ -195,7 +195,6 @@ export default function AuthComponent({setLoggedIn, onRegister}) {
                                     onChange={(e) => setPasswordConfirm(e.target.value)}
                                     required
                                     isInvalid={!doesPasswordConfirmationMatch()}
-                                    isValid={doesPasswordConfirmationMatch()}
                                     className="mb-2"
                                 />
                                 <Form.Control.Feedback type="invalid">Password confirmation does not match.</Form.Control.Feedback>
