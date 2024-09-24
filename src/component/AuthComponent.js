@@ -1,5 +1,5 @@
-import * as React from 'react';
 import {useState, useEffect} from "react";
+import {Button, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {isAuthenticated} from "../helper/session_state_helper";
@@ -13,6 +13,7 @@ export default function AuthComponent({onLogin, onRegister}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [validated, setValidated] = useState(false);
 
     const navigate = useNavigate();
 
@@ -23,7 +24,12 @@ export default function AuthComponent({onLogin, onRegister}) {
     }, [navigate]);
 
     const onSubmitLogin = (event) => {
-        onLogin(event, email, password);
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === true) {
+            onLogin(email, password);
+        }
+        setValidated(true);
     }
 
     const onSubmitRegister = (event) => {
@@ -57,19 +63,37 @@ export default function AuthComponent({onLogin, onRegister}) {
                     <div
                         className={classNames("tab-pane", "fade", active === "login" ? "show active" : "")}
                         id="pills-login">
-                        <form onSubmit={onSubmitLogin} id="login-form">
-                            <div className="form-outline">
-                                <label htmlFor="loginEmail">Email</label>
-                                <input type="text" id="loginEmail" name="email" placeholder="Email"
-                                       className="form-control" onChange={(e) => setEmail(e.target.value)}/>
-                            </div>
-                            <div className="form-outline">
-                                <label htmlFor="loginPassword">Password</label>
-                                <input type="password" id="loginPassword" name="password" placeholder="Password"
-                                       className="form-control" onChange={(e) => setPassword(e.target.value)}/>
-                            </div>
-                            <button type="submit" className="btn btn-primary btn-block form-button">Sign in</button>
-                        </form>
+                        <Form noValidate validated={validated} onSubmit={onSubmitLogin}>
+                            <Form.Group controlId="formEmail">
+                                <Form.Label className="mb-0">Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide a valid
+                                    email.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="formPassword">
+                                <Form.Label className="mb-0">Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    minLength={8}
+                                    className="mb-2"
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Password must be minimum 8 characters long.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <Button type="submit" className="btn btn-primary btn-block form-button">Sign in</Button>
+                        </Form>
                     </div>
 
                     <div

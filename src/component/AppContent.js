@@ -10,8 +10,7 @@ export default function AppContent({setLoggedIn}) {
 
     const navigate = useNavigate();
 
-    const onLogin = (e, email, password) => {
-        e.preventDefault();
+    const onLogin = (email, password) => {
         request("auth/login",
             "POST",
             {email: email, password: password}
