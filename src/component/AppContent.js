@@ -9,11 +9,11 @@ export default function AppContent({setLoggedIn}) {
     return (
         <div>
             <Routes>
-                <Route path={ROOT} element={<Navigate to={HOME}/>}></Route>
-                <Route path={HOME} element={<ProtectedContent/>}></Route>
-                <Route path={LOGIN} element={<AuthComponent setLoggedIn={setLoggedIn}/>}></Route>
-                <Route path={ERROR} element={<ErrorComponent/>}></Route>
-                <Route path="*" element={<ErrorComponent message="Page not found"/>}></Route>
+                <Route path={ROOT} element={<Navigate to={HOME}/>}/>
+                <Route path={HOME} element={<ProtectedContent/>}/>
+                <Route path={LOGIN} element={<AuthComponent setLoggedIn={setLoggedIn}/>}/>
+                <Route path={ERROR} element={<ErrorComponent/>}/>
+                <Route path="*" element={<ErrorComponent message="Page not found"/>}/>
             </Routes>
         </div>
     );
