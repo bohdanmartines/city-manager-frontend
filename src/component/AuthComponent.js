@@ -35,7 +35,7 @@ export default function AuthComponent({onLogin, onRegister}) {
     const onSubmitRegister = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-        if (form.checkValidity() === true) {
+        if (form.checkValidity() === true && doesPasswordConfirmationMatch()) {
             onRegister(
                 name,
                 surname,
@@ -46,6 +46,10 @@ export default function AuthComponent({onLogin, onRegister}) {
         }
         setValidated(true);
 
+    }
+
+    function doesPasswordConfirmationMatch() {
+        return password === passwordConfirm;
     }
 
     return (
@@ -163,6 +167,8 @@ export default function AuthComponent({onLogin, onRegister}) {
                                     value={passwordConfirm}
                                     onChange={(e) => setPasswordConfirm(e.target.value)}
                                     required
+                                    isInvalid={!doesPasswordConfirmationMatch()}
+                                    isValid={doesPasswordConfirmationMatch()}
                                     className="mb-2"
                                 />
                                 <Form.Control.Feedback type="invalid">Password confirmation does not match.</Form.Control.Feedback>
