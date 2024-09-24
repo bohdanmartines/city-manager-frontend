@@ -2,10 +2,11 @@ import {useState, useEffect} from "react";
 import {Button, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
-import {isAuthenticated} from "../helper/session_state_helper";
-import {HOME} from "../helper/path";
+import {isAuthenticated, setAuthTokens} from "../helper/session_state_helper";
+import {ERROR, HOME} from "../helper/path";
+import {request} from "../helper/backend_client";
 
-export default function AuthComponent({onLogin, onRegister}) {
+export default function AuthComponent({setLoggedIn, onRegister}) {
 
     const [active, setActive] = useState("login");
     const [name, setName] = useState("");
@@ -27,25 +28,51 @@ export default function AuthComponent({onLogin, onRegister}) {
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === true) {
-            onLogin(email, password);
+            callLogin();
         }
         setValidated(true);
+    }
+
+    function callLogin() {
+        request("auth/login",
+            "POST",
+            {email: email, password: password}
+        ).then((response) => {
+            setLoggedIn(true);
+            navigate(HOME);
+            setAuthTokens(response.data.accessToken, response.data.refreshToken);
+        }).catch((error) => {
+            navigate(ERROR);
+        });
     }
 
     const onSubmitRegister = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === true && doesPasswordConfirmationMatch()) {
-            onRegister(
-                name,
-                surname,
-                email,
-                password,
-                passwordConfirm
-            );
+            callRegister();
         }
         setValidated(true);
 
+    }
+
+    function callRegister() {
+        request("auth/register",
+            "POST",
+            {
+                name: name,
+                surname: surname,
+                email: email,
+                password: password,
+                confirmPassword: passwordConfirm
+            }
+        ).then((response) => {
+            setLoggedIn(true);
+            navigate(HOME);
+            setAuthTokens(response.data.accessToken, response.data.refreshToken);
+        }).catch((error) => {
+            navigate(ERROR);
+        });
     }
 
     function doesPasswordConfirmationMatch() {
