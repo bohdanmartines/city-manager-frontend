@@ -121,12 +121,10 @@ export default function AuthComponent({setLoggedIn, onRegister}) {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    minLength={8}
                                     className="mb-2"
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    Password must be minimum 8 characters long.
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Please provide your
+                                    password.</Form.Control.Feedback>
                             </Form.Group>
                             <Button type="submit" className="btn btn-primary btn-block form-button">Sign in</Button>
                         </Form>
@@ -197,7 +195,8 @@ export default function AuthComponent({setLoggedIn, onRegister}) {
                                     isInvalid={!doesPasswordConfirmationMatch()}
                                     className="mb-2"
                                 />
-                                <Form.Control.Feedback type="invalid">Password confirmation does not match.</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Password confirmation does not
+                                    match.</Form.Control.Feedback>
                             </Form.Group>
                             <Button type="submit" className="btn btn-primary btn-block form-button">Sign up</Button>
                         </Form>
