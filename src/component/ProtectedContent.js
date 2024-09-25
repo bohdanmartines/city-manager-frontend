@@ -4,7 +4,6 @@ import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "../helper/path";
-import Dashboard from "./Dashboard";
 
 export default function ProtectedContent() {
 
