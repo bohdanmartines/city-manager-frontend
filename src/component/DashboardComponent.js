@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {Link, useNavigate} from "react-router-dom";
-import {ERROR, LOGIN, NEW_TICKET} from "../helper/path";
+import {ERROR, LOGIN, NEW_TICKET, TICKET_DETAILS_BASE_PATH} from "../helper/path";
 
 export default function DashboardComponent() {
 
@@ -44,7 +44,8 @@ export default function DashboardComponent() {
                         </thead>
                         <tbody>
                         {tickets.map((ticket) => (
-                            <tr key={ticket.id} className="clickable">
+                            <tr key={ticket.id} className="clickable"
+                                onClick={() => navigate(`${TICKET_DETAILS_BASE_PATH}/${ticket.id}`)}>
                                 <th scope="row">{ticket.id}</th>
                                 <td>{ticket.title}</td>
                                 <td>{ticket.description}</td>
