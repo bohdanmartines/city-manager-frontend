@@ -2,8 +2,8 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
-import {useNavigate} from "react-router-dom";
-import {ERROR, LOGIN} from "../helper/path";
+import {Link, useNavigate} from "react-router-dom";
+import {ERROR, LOGIN, NEW_TICKET} from "../helper/path";
 
 export default function DashboardComponent() {
 
@@ -31,7 +31,7 @@ export default function DashboardComponent() {
             <div className="col-6">
                 <div className="container mt-4">
                     <h3 className="mb-3">Dashboard</h3>
-                    <p className="lead">View existing tickets or create a new one</p>
+                    <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
                     <table className="table table-striped">
                         <thead>
                         <tr>
