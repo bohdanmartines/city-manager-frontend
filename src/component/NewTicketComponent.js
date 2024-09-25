@@ -41,8 +41,6 @@ export default function NewTicketComponent() {
                 description,
             };
             onCreate(newTicket);
-            setTitle('');
-            setDescription('');
         }
         setValidated(true);
     };
