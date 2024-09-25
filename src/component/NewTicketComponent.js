@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 import {isAuthenticated} from "../helper/session_state_helper";
-import {ERROR, LOGIN} from "../helper/path";
+import {ERROR, LOGIN, TICKET_DETAILS_BASE_PATH} from "../helper/path";
 import {request} from "../helper/backend_client";
 
 export default function NewTicketComponent() {
@@ -24,8 +24,7 @@ export default function NewTicketComponent() {
             "POST",
             newTicket
         ).then(response => {
-            console.log("New ticket created!");
-            // TODO Redirect to the ticket page
+            navigate(`${TICKET_DETAILS_BASE_PATH}/${response.data}`);
         }).catch(() => {
             navigate(ERROR);
         });
