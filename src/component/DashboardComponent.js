@@ -44,7 +44,7 @@ export default function DashboardComponent() {
                         </thead>
                         <tbody>
                         {tickets.map((ticket) => (
-                            <tr key={ticket.id}>
+                            <tr key={ticket.id} className="clickable">
                                 <th scope="row">{ticket.id}</th>
                                 <td>{ticket.title}</td>
                                 <td>{ticket.description}</td>

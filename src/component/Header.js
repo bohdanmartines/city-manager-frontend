@@ -17,7 +17,7 @@ export default function Header({logoSrc, pageTitle, loggedIn, setLoggedIn}) {
         <header className="App-header">
             <div className="row">
                 <div className="col-4"></div>
-                <div className="col-4 text-center" style={{cursor: 'pointer'}} onClick={() => navigate(HOME)}>
+                <div className="col-4 text-center clickable" onClick={() => navigate(HOME)}>
                     <img src={logoSrc} alt="logo" className="App-logo"/>
                     <h1 className="App-title">{pageTitle}</h1>
                 </div>
