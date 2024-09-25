@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {ERROR, LOGIN} from "../helper/path";
 import {request} from "../helper/backend_client";
+import {toLocaleDatetimeString} from "../helper/date_utils";
 
 export default function TicketDetails() {
 
@@ -31,20 +32,6 @@ export default function TicketDetails() {
         return <div>No ticket selected</div>;
     }
 
-    function formatDateTime(date) {
-        if (date === undefined) {
-            return date;
-        }
-        if (date.indexOf('.') !== -1) {
-            date = date.split('.')[0];
-        }
-        if (date.indexOf('T') !== -1) {
-            const splitDate = date.split('T');
-            return splitDate[0] + " " + splitDate[1];
-        }
-        return date;
-    }
-
     return (
         <div>
             <div className="row justify-content-md-center">
@@ -71,7 +58,7 @@ export default function TicketDetails() {
                             </tr>
                             <tr key="createdAt">
                                 <th scope="row">Creation time</th>
-                                <td>{formatDateTime(ticket.createdAt)}</td>
+                                <td>{toLocaleDatetimeString(ticket.createdAt)}</td>
                             </tr>
                             </tbody>
                         </table>

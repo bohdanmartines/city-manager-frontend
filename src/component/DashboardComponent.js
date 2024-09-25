@@ -4,6 +4,7 @@ import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {Link, useNavigate} from "react-router-dom";
 import {ERROR, LOGIN, NEW_TICKET, TICKET_DETAILS_BASE_PATH} from "../helper/path";
+import {toLocaleDateString} from "../helper/date_utils";
 
 export default function DashboardComponent() {
 
@@ -32,7 +33,7 @@ export default function DashboardComponent() {
                 <div className="container mt-4">
                     <h3 className="mb-3">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
-                    <table className="table table-striped">
+                    <table className="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Ticket ID</th>
@@ -50,7 +51,7 @@ export default function DashboardComponent() {
                                 <td>{ticket.title}</td>
                                 <td>{ticket.description}</td>
                                 <td>{ticket.status}</td>
-                                <td>{new Date(ticket.createdAt).toLocaleDateString()}</td>
+                                <td>{toLocaleDateString(ticket.createdAt)}</td>
                             </tr>
                         ))}
                         </tbody>
