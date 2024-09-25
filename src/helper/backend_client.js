@@ -15,6 +15,7 @@ export const request = (url, method, data) => {
     return axios({
         url: url,
         method: method,
+        headers: headers,
         data: data
     })
 };
