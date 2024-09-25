@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {request} from "../helper/backend_client";
 import {isAuthenticated} from "../helper/session_state_helper";
 import {useNavigate} from "react-router-dom";
-import {LOGIN} from "../helper/path";
+import {ERROR, LOGIN} from "../helper/path";
 
 export default function DashboardComponent() {
 
@@ -20,6 +20,8 @@ export default function DashboardComponent() {
                 {}
             ).then(response => {
                 setTickets(response.data);
+            }).catch(() => {
+                navigate(ERROR);
             });
         }
     }, [navigate])
