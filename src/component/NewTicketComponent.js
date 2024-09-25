@@ -1,16 +1,23 @@
 import { useState } from 'react';
+import {Button, Form} from "react-bootstrap";
 
 export default function NewTicketComponent() {
 
-        const [title, setTitle] = useState('');
-        const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [validated, setValidated] = useState(false);
 
     const onCreate = (newTicket) => {
         console.log("About to create a new ticket", newTicket);
+        // TODO implement a call to the backend to create a ticket
     };
 
     const handleSubmit = (e) => {
-            e.preventDefault();
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        } else {
             const newTicket = {
                 title,
                 description,
@@ -18,38 +25,45 @@ export default function NewTicketComponent() {
             onCreate(newTicket);
             setTitle('');
             setDescription('');
-        };
+        }
+        setValidated(true);
+    };
 
     return (
         <div className="row justify-content-md-center">
             <div className="col-6">
                 <div className="container mt-5">
                     <h2 className="mb-4">Create New Ticket</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="title" className="form-label">Title</label>
-                            <input
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formTitle">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control
                                 type="text"
-                                className="form-control"
-                                id="title"
+                                placeholder="Enter title"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                                 required
                             />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="description" className="form-label">Description</label>
-                            <textarea
-                                className="form-control"
-                                id="description"
-                                rows="3"
+                            <Form.Control.Feedback type="invalid">Please provide ticket title.</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formDescription">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                placeholder="Enter description"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 required
-                            ></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Create Ticket</button>
-                    </form>
+                            />
+                            <Form.Control.Feedback type="invalid">Please provide ticket description.</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit">
+                            Create Ticket
+                        </Button>
+                    </Form>
                 </div>
             </div>
         </div>
