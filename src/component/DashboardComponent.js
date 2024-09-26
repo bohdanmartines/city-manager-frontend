@@ -68,8 +68,8 @@ export default function DashboardComponent() {
                             <tr key={ticket.id} className="clickable"
                                 onClick={() => navigate(`${TICKET_DETAILS_BASE_PATH}/${ticket.id}`)}>
                                 <th scope="row">{ticket.id}</th>
-                                <td>{ticket.title}</td>
-                                <td>{ticket.description}</td>
+                                <td className="dashboard-text">{ticket.title}</td>
+                                <td className="dashboard-text">{ticket.description}</td>
                                 <td>{ticket.status}</td>
                                 <td>{toLocaleDateString(ticket.createdAt)}</td>
                             </tr>
