@@ -9,6 +9,9 @@ import {toLocaleDateString} from "../helper/date_utils";
 export default function DashboardComponent() {
 
     const [tickets, setTickets] = useState([]);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [totalPages, setTotalPages] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,16 +19,17 @@ export default function DashboardComponent() {
             navigate(LOGIN)
         } else {
             request(
-                "ticket",
+                `ticket?page=${page}&size=${size}`,
                 "GET",
                 {}
             ).then(response => {
-                setTickets(response.data);
+                setTickets(response.data.content);
+                setTotalPages(response.data.totalPages);
             }).catch(() => {
                 navigate(ERROR);
             });
         }
-    }, [navigate])
+    }, [page, size, navigate])
 
     return (
         <div className="row justify-content-md-center">
@@ -33,6 +37,10 @@ export default function DashboardComponent() {
                 <div className="container mt-4">
                     <h3 className="mb-3">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
+                    <div>
+                        <button onClick={() => setPage(page - 1)} disabled={page === 0}>Previous</button>
+                        <button onClick={() => setPage(page + 1)} disabled={page + 1 === totalPages}>Next</button>
+                    </div>
                     <table className="table table-striped table-hover">
                         <thead>
                         <tr>
