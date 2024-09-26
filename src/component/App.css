@@ -32,3 +32,15 @@
     text-overflow: ellipsis;
     max-width: 200px;
 }
+
+.button-container-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%; /* Adjust as needed */
+}
+
+.button-container-two-sides {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Adjust as needed */
+}

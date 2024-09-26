@@ -1,9 +1,10 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {isAuthenticated} from "../helper/session_state_helper";
-import {ERROR, LOGIN} from "../helper/path";
+import {ERROR, HOME, LOGIN} from "../helper/path";
 import {request} from "../helper/backend_client";
 import {toLocaleDatetimeString} from "../helper/date_utils";
+import {Button} from "react-bootstrap";
 
 export default function TicketDetails() {
 
@@ -62,6 +63,10 @@ export default function TicketDetails() {
                             </tr>
                             </tbody>
                         </table>
+                        <div className="button-container-right">
+                            <Button variant="secondary" type="button" onClick={() => navigate(HOME)}>Back to
+                                Dashboard</Button>
+                        </div>
                     </div>
                 </div>
             </div>
