@@ -49,7 +49,7 @@ export default function NewTicketComponent() {
         <div className="row justify-content-md-center">
             <div className="col-6">
                 <div className="container mt-4">
-                    <h2 className="mb-4">Create New Ticket</h2>
+                    <h3 className="mb-4">Create New Ticket</h3>
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formTitle">
                             <Form.Label>Title</Form.Label>
