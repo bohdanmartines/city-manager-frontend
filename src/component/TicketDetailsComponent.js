@@ -33,6 +33,14 @@ export default function TicketDetails() {
         return <div>No ticket selected</div>;
     }
 
+    function handleVote(ticketId) {
+
+    }
+
+    function handleUnvote(ticketId) {
+
+    }
+
     return (
         <div>
             <div className="row justify-content-md-center">
@@ -68,6 +76,14 @@ export default function TicketDetails() {
                             <tr key="createdAt">
                                 <th scope="row">Creation time</th>
                                 <td>{toLocaleDatetimeString(ticket.createdAt)}</td>
+                            </tr>
+                            <tr key="votes">
+                                <th scope="row">Votes</th>
+                                <td>
+                                    <p>256</p>
+                                    <Button variant="success" onClick={() => handleVote(ticket.id)}>Vote</Button>
+                                    <Button variant="danger" onClick={() => handleUnvote(ticket.id)}>Unvote</Button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
