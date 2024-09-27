@@ -6,6 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {ERROR, LOGIN, NEW_TICKET, TICKET_DETAILS_BASE_PATH} from "../helper/path";
 import {toLocaleDateString} from "../helper/date_utils";
 import {Pagination} from "react-bootstrap";
+import TicketStatusBadge from "./TicketStatusBadge";
 
 export default function DashboardComponent() {
 
@@ -70,7 +71,7 @@ export default function DashboardComponent() {
                                 <th scope="row">{ticket.id}</th>
                                 <td className="dashboard-text">{ticket.title}</td>
                                 <td className="dashboard-text">{ticket.description}</td>
-                                <td>{ticket.status}</td>
+                                <td><TicketStatusBadge status={ticket.status}/></td>
                                 <td>{toLocaleDateString(ticket.createdAt)}</td>
                             </tr>
                         ))}

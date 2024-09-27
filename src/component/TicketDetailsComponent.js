@@ -5,6 +5,7 @@ import {ERROR, HOME, LOGIN} from "../helper/path";
 import {request} from "../helper/backend_client";
 import {toLocaleDatetimeString} from "../helper/date_utils";
 import {Button} from "react-bootstrap";
+import TicketStatusBadge from "./TicketStatusBadge";
 
 export default function TicketDetails() {
 
@@ -13,7 +14,6 @@ export default function TicketDetails() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("Showing details for ticket ID: " + ticketId)
         if (!isAuthenticated()) {
             navigate(LOGIN)
         } else {
@@ -55,7 +55,7 @@ export default function TicketDetails() {
                             </tr>
                             <tr key="status">
                                 <th scope="row">Status</th>
-                                <td>{ticket.status}</td>
+                                <td><TicketStatusBadge status={ticket.status}/></td>
                             </tr>
                             <tr key="createdAt">
                                 <th scope="row">Creation time</th>
