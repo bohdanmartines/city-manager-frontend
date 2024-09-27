@@ -14,6 +14,7 @@ export default function DashboardComponent() {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
+    const maxPages = 10;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,26 +39,42 @@ export default function DashboardComponent() {
         setPage(0);
     }
 
+    const handleJump = (offset) => {
+        const newPage = Math.min(Math.max(page + offset, 0), totalPages - 1);
+        setPage(newPage);
+    };
+
+    function getRelevantPages() {
+        if (totalPages <= maxPages) {
+            return [...Array(totalPages)].map((value, index) => index);
+        }
+        const startPage = Math.floor(page/maxPages) * maxPages;
+        const endPage = Math.min(totalPages - 1, startPage + maxPages - 1);
+        return Array.from({length: endPage - startPage + 1}, (_, i) => startPage + i);
+    }
+
     return (
         <div className="row justify-content-md-center">
-            <div className="col-6">
+            <div className="col-7">
                 <div className="container mt-4">
                     <h3 className="mb-2">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
-                    <div className="d-flex justify-content-between align-items-center mt-4 mb-3">
+                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 mb-3">
                         <Pagination className="m-0">
                             <Pagination.First onClick={() => setPage(0)} disabled={page === 0}/>
+                            <Pagination.Item onClick={() => handleJump(-10)} disabled={page < maxPages}>-10</Pagination.Item>
                             <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
-                            {[...Array(totalPages)].map((_, index) => (
+                            {getRelevantPages().map((value) => (
                                 <Pagination.Item
-                                    key={index}
-                                    active={index === page}
-                                    onClick={() => setPage(index)}
+                                    key={value}
+                                    active={value === page}
+                                    onClick={() => setPage(value)}
                                 >
-                                    {index + 1}
+                                    {value + 1}
                                 </Pagination.Item>
                             ))}
                             <Pagination.Next onClick={() => setPage(page + 1)} disabled={page === totalPages - 1}/>
+                            <Pagination.Item onClick={() => handleJump(10)} disabled={page > totalPages - (maxPages + 1)}>+10</Pagination.Item>
                             <Pagination.Last onClick={() => setPage(totalPages - 1)}
                                              disabled={page === totalPages - 1}/>
                         </Pagination>
