@@ -63,13 +63,23 @@ export default function TicketDetails() {
         return <div>No ticket selected</div>;
     }
 
+    function renderVoteSign() {
+        return (
+            <div className="d-flex align-content-center clickable" onClick={() => callVote(!ticket.iVoted)}>
+                {ticket.iVoted ? <FaHeart className="heart-voted me-1"/> :
+                    <FaRegHeart className="heart-not-voted me-1"/>}
+                <span>Vote</span>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="row justify-content-md-center">
                 <div className="col-6">
                     <div className="container mt-4">
                         <h3 className="mb-3">Ticket Details</h3>
-                        <table className="table table-striped table-hover">
+                        <table className="table table-striped">
                             <tbody>
                             <tr key="id">
                                 <th scope="row">Ticket ID</th>
@@ -102,15 +112,12 @@ export default function TicketDetails() {
                             <tr key="votes">
                                 <th scope="row">Votes</th>
                                 <td>
-                                    <p>256</p>
-                                    {ticket.iVoted &&
-                                        <span onClick={() => handleUnvote(ticket.id)} className="heart-voted">
-                                        <FaHeart/>
-                                    </span>}
-                                    {!ticket.iVoted &&
-                                        <span onClick={() => handleVote(ticket.id)} className="heart-not-voted">
-                                        <FaRegHeart/>
-                                    </span>}
+                                    <div className="d-flex">
+                                        <p className="me-3">256 votes</p>
+                                        <div>
+                                            {renderVoteSign()}
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
