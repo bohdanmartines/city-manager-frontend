@@ -65,10 +65,11 @@ export default function TicketDetails() {
 
     function renderVoteSign() {
         return (
-            <div className="d-flex align-content-center clickable" onClick={() => callVote(!ticket.iVoted)}>
-                {ticket.iVoted ? <FaHeart className="heart-voted me-1"/> :
-                    <FaRegHeart className="heart-not-voted me-1"/>}
-                <span>Vote</span>
+            <div className="d-flex align-items-center clickable" onClick={() => callVote(!ticket.iVoted)}>
+                <div className="me-1">
+                    {ticket.iVoted ? <FaHeart className="heart-voted"/> : <FaRegHeart className="heart-not-voted"/>}
+                </div>
+                <span className="fw-bold text-muted">Vote</span>
             </div>
         );
     }
@@ -113,7 +114,7 @@ export default function TicketDetails() {
                                 <th scope="row">Votes</th>
                                 <td>
                                     <div className="d-flex">
-                                        <p className="me-3">256 votes</p>
+                                        <p className="me-4">256 votes</p>
                                         <div>
                                             {renderVoteSign()}
                                         </div>
