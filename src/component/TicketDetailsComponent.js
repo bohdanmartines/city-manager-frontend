@@ -57,6 +57,14 @@ export default function TicketDetails() {
                                 <th scope="row">Status</th>
                                 <td><TicketStatusBadge status={ticket.status}/></td>
                             </tr>
+                            <tr key="creator">
+                                <th scope="row">Creator</th>
+                                <td>{ticket.creatorEmail}</td>
+                            </tr>
+                            <tr key="assignee">
+                                <th scope="row">Assignee</th>
+                                <td>{ticket.assigneeEmail}</td>
+                            </tr>
                             <tr key="createdAt">
                                 <th scope="row">Creation time</th>
                                 <td>{toLocaleDatetimeString(ticket.createdAt)}</td>
