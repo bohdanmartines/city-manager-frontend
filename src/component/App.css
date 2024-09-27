@@ -44,3 +44,13 @@
     justify-content: space-between;
     width: 100%; /* Adjust as needed */
 }
+
+.heart-vote {
+    cursor: pointer;
+    color: red;
+}
+
+.heart-no-vote {
+    cursor: pointer;
+    color: grey
+}

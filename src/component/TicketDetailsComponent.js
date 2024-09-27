@@ -6,6 +6,7 @@ import {request} from "../helper/backend_client";
 import {toLocaleDatetimeString} from "../helper/date_utils";
 import {Button} from "react-bootstrap";
 import TicketStatusBadge from "./TicketStatusBadge";
+import {FaHeart, FaRegHeart} from "react-icons/fa";
 
 export default function TicketDetails() {
 
@@ -29,16 +30,16 @@ export default function TicketDetails() {
         }
     }, [navigate])
 
-    if (!ticketId) {
-        return <div>No ticket selected</div>;
-    }
-
     function handleVote(ticketId) {
-
+        console.log(`Vote for ticket: ${ticketId}!`);
     }
 
     function handleUnvote(ticketId) {
+        console.log(`Un-vote for ticket: ${ticketId}!`);
+    }
 
+    if (!ticketId) {
+        return <div>No ticket selected</div>;
     }
 
     return (
@@ -81,8 +82,14 @@ export default function TicketDetails() {
                                 <th scope="row">Votes</th>
                                 <td>
                                     <p>256</p>
-                                    <Button variant="success" onClick={() => handleVote(ticket.id)}>Vote</Button>
-                                    <Button variant="danger" onClick={() => handleUnvote(ticket.id)}>Unvote</Button>
+                                    {ticket.iVoted &&
+                                        <span onClick={() => handleVote(ticket.id)} className="heart-vote">
+                                        <FaHeart/>
+                                    </span>}
+                                    {!ticket.iVoted &&
+                                        <span onClick={() => handleUnvote(ticket.id)} className="heart-no-vote">
+                                        <FaRegHeart/>
+                                    </span>}
                                 </td>
                             </tr>
                             </tbody>
