@@ -14,28 +14,49 @@ export default function TicketDetails() {
     const [ticket, setTicket] = useState({});
     const navigate = useNavigate();
 
+    function getTicketData() {
+        request(
+            "ticket/" + ticketId,
+            "GET",
+            {}
+        ).then(response => {
+            setTicket(response.data);
+        }).catch(() => {
+            navigate(ERROR);
+        });
+    }
+
     useEffect(() => {
         if (!isAuthenticated()) {
             navigate(LOGIN)
         } else {
-            request(
-                "ticket/" + ticketId,
-                "GET",
-                {}
-            ).then(response => {
-                setTicket(response.data);
-            }).catch((error) => {
-                navigate(ERROR);
-            });
+            getTicketData();
         }
     }, [navigate])
 
     function handleVote(ticketId) {
         console.log(`Vote for ticket: ${ticketId}!`);
+        callVote(true);
     }
 
     function handleUnvote(ticketId) {
         console.log(`Un-vote for ticket: ${ticketId}!`);
+        callVote(false);
+    }
+
+    function callVote(shouldVote) {
+        if (typeof shouldVote !== 'boolean') {
+            throw new Error('Parameter of callVote() must be a boolean specifying whether the user wants to vote or un-vote.');
+        }
+        request(
+            "ticket/" + ticketId + (shouldVote ? "/vote" : "/unvote"),
+            "POST",
+            {}
+        ).then(() => {
+            getTicketData();
+        }).catch(() => {
+            navigate(ERROR);
+        });
     }
 
     if (!ticketId) {
@@ -83,11 +104,11 @@ export default function TicketDetails() {
                                 <td>
                                     <p>256</p>
                                     {ticket.iVoted &&
-                                        <span onClick={() => handleVote(ticket.id)} className="heart-vote">
+                                        <span onClick={() => handleUnvote(ticket.id)} className="heart-voted">
                                         <FaHeart/>
                                     </span>}
                                     {!ticket.iVoted &&
-                                        <span onClick={() => handleUnvote(ticket.id)} className="heart-no-vote">
+                                        <span onClick={() => handleVote(ticket.id)} className="heart-not-voted">
                                         <FaRegHeart/>
                                     </span>}
                                 </td>

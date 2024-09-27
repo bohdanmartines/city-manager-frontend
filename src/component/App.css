@@ -45,12 +45,12 @@
     width: 100%; /* Adjust as needed */
 }
 
-.heart-vote {
+.heart-voted {
     cursor: pointer;
     color: red;
 }
 
-.heart-no-vote {
+.heart-not-voted {
     cursor: pointer;
     color: grey
 }
