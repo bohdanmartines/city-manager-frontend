@@ -33,6 +33,11 @@ export default function DashboardComponent() {
         }
     }, [page, size, navigate])
 
+    function handlePageSizeChange(e) {
+        setSize(Number(e.target.value));
+        setPage(0);
+    }
+
     return (
         <div className="row justify-content-md-center">
             <div className="col-6">
@@ -62,14 +67,13 @@ export default function DashboardComponent() {
                                 id="ticketsPerPage"
                                 className="form-select"
                                 value={size}
-                                onChange={(e) => setSize(Number(e.target.value))}
+                                onChange={(e) => handlePageSizeChange(e)}
                             >
                                 <option value={5}>5</option>
                                 <option value={10}>10</option>
                                 <option value={25}>25</option>
                                 <option value={50}>50</option>
                                 <option value={100}>100</option>
-                                <option value={tickets.length}>All</option>
                             </select>
                         </div>
                     </div>
