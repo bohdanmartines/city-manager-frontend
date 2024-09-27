@@ -81,7 +81,7 @@ export default function AuthComponent({setLoggedIn, onRegister}) {
 
     return (
         <div className="row justify-content-center">
-            <div className="col-4 mt-3">
+            <div className="col-4 mt-5">
                 <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                     <li className="nav-item" role="presentation">
                         <button className={classNames("nav-link", active === "login" ? "active" : "")}
