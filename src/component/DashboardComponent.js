@@ -12,7 +12,7 @@ export default function DashboardComponent() {
 
     const [tickets, setTickets] = useState([]);
     const [page, setPage] = useState(0);
-    const size = 10;
+    const [size, setSize] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const navigate = useNavigate();
 
@@ -39,21 +39,37 @@ export default function DashboardComponent() {
                 <div className="container mt-4">
                     <h3 className="mb-3">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
-                    <Pagination>
-                        <Pagination.First onClick={() => setPage(0)} disabled={page === 0} />
-                        <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0} />
-                        {[...Array(totalPages)].map((_, index) => (
-                            <Pagination.Item
-                                key={index}
-                                active={index === page}
-                                onClick={() => setPage(index)}
-                            >
-                                {index + 1}
-                            </Pagination.Item>
-                        ))}
-                        <Pagination.Next onClick={() => setPage(page + 1)} disabled={page === totalPages - 1} />
-                        <Pagination.Last onClick={() => setPage(totalPages - 1)} disabled={page === totalPages - 1} />
-                    </Pagination>
+                    <div className="mb-3">
+                        <label htmlFor="ticketsPerPage" className="form-label">Tickets per page:</label>
+                        <select
+                            id="ticketsPerPage"
+                            className="form-select"
+                            value={size}
+                            onChange={(e) => setSize(Number(e.target.value))}
+                        >
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={25}>25</option>
+                            <option value={50}>50</option>
+                            <option value={100}>100</option>
+                            <option value={tickets.length}>All</option>
+                        </select>
+                        <Pagination>
+                            <Pagination.First onClick={() => setPage(0)} disabled={page === 0}/>
+                            <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
+                            {[...Array(totalPages)].map((_, index) => (
+                                <Pagination.Item
+                                    key={index}
+                                    active={index === page}
+                                    onClick={() => setPage(index)}
+                                >
+                                    {index + 1}
+                                </Pagination.Item>
+                            ))}
+                            <Pagination.Next onClick={() => setPage(page + 1)} disabled={page === totalPages - 1}/>
+                            <Pagination.Last onClick={() => setPage(totalPages - 1)} disabled={page === totalPages - 1}/>
+                        </Pagination>
+                    </div>
                     <table className="table table-striped table-hover">
                         <thead>
                         <tr>
