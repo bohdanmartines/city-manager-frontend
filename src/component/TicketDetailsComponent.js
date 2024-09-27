@@ -114,7 +114,7 @@ export default function TicketDetails() {
                                 <th scope="row">Votes</th>
                                 <td>
                                     <div className="d-flex">
-                                        <p className="me-4">256 votes</p>
+                                        <p className="me-4"><span>{ticket.votes}</span> votes</p>
                                         <div>
                                             {renderVoteSign()}
                                         </div>
