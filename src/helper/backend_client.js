@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getAccessToken} from "./session_state_helper";
 
-axios.defaults.baseURL = 'http://localhost:8080/api/';
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL + '/api/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
