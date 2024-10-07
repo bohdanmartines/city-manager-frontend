@@ -54,9 +54,9 @@ export default function DashboardComponent() {
     }
 
     return (
-        <div className="row justify-content-md-center">
-            <div className="col-7">
-                <div className="container mt-4 table-responsive">
+        <div className="row justify-content-center">
+            <div className="col-12 col-md-7">
+                <div className="container mt-4">
                     <h3 className="mb-2">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
                     <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 mb-3">
@@ -93,29 +93,31 @@ export default function DashboardComponent() {
                             </select>
                         </div>
                     </div>
-                    <table className="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Ticket ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {tickets.map((ticket) => (
-                            <tr key={ticket.id} className="clickable"
-                                onClick={() => navigate(`${TICKET_DETAILS_BASE_PATH}/${ticket.id}`)}>
-                                <th scope="row">{ticket.id}</th>
-                                <td className="dashboard-text">{ticket.title}</td>
-                                <td className="dashboard-text">{ticket.description}</td>
-                                <td><TicketStatusBadge status={ticket.status}/></td>
-                                <td>{toLocaleDateString(ticket.createdAt)}</td>
+                    <div className="table-responsive">
+                        <table className="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Ticket ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Created At</th>
                             </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {tickets.map((ticket) => (
+                                <tr key={ticket.id} className="clickable"
+                                    onClick={() => navigate(`${TICKET_DETAILS_BASE_PATH}/${ticket.id}`)}>
+                                    <th scope="row">{ticket.id}</th>
+                                    <td className="dashboard-text">{ticket.title}</td>
+                                    <td className="dashboard-text">{ticket.description}</td>
+                                    <td><TicketStatusBadge status={ticket.status}/></td>
+                                    <td>{toLocaleDateString(ticket.createdAt)}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
