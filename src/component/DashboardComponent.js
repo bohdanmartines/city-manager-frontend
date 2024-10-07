@@ -59,8 +59,8 @@ export default function DashboardComponent() {
                 <div className="container mt-4">
                     <h3 className="mb-2">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
-                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 mb-3">
-                        <Pagination className="m-0">
+                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 mb-3 overflow-auto">
+                        <Pagination className="m-0" size="sm">
                             <Pagination.First onClick={() => setPage(0)} disabled={page === 0}/>
                             <Pagination.Item onClick={() => handleJump(-10)} disabled={page < maxPages}>-10</Pagination.Item>
                             <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
