@@ -20,11 +20,7 @@ export default function App() {
         <div>
             <Header pageTitle="City Manager" logoSrc={logo} loggedIn={loggedIn} setLoggedIn={updateLoggedIn}/>
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col">
-                        <AppContent setLoggedIn={updateLoggedIn}/>
-                    </div>
-                </div>
+                <AppContent setLoggedIn={updateLoggedIn}/>
             </div>
         </div>
     );
