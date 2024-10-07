@@ -56,7 +56,7 @@ export default function DashboardComponent() {
     return (
         <div className="row justify-content-center">
             <div className="col-12 col-md-7">
-                <div className="container mt-4">
+                <div className="mt-4">
                     <h3 className="mb-2">Dashboard</h3>
                     <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.</p>
                     <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 mb-3 overflow-auto">
@@ -92,6 +92,9 @@ export default function DashboardComponent() {
                                 <option value={100}>100</option>
                             </select>
                         </div>
+                    </div>
+                    <div>
+
                     </div>
                     <div className="table-responsive">
                         <table className="table table-striped table-hover">
