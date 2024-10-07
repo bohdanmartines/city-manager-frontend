@@ -1,15 +1,16 @@
 .App-logo {
-    height: 80px;
+    height: 70px;
+    border-radius: 6px;
 }
 
 .App-title {
     font-size: 1.5em;
+    margin-left: 10px;
 }
 
 .App-header {
     background-color: #222222;
-    height: 150px;
-    padding: 20px 40px;
+    padding: 12px;
     color: white;
     text-align: center;
 }
@@ -53,4 +54,9 @@
 .heart-not-voted {
     cursor: pointer;
     color: grey
+}
+
+.logout-sign {
+    color: #0dcaf0;
+    cursor: pointer;
 }
