@@ -46,42 +46,45 @@ export default function NewTicketComponent() {
     };
 
     return (
-        <div className="row justify-content-md-center">
-            <div className="col-6">
-                <div className="container mt-4">
-                    <h3 className="mb-4">Create New Ticket</h3>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formTitle">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter title"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">Please provide ticket title.</Form.Control.Feedback>
-                        </Form.Group>
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <div className="col-11 col-md-6">
+                    <div className="container mt-4">
+                        <h3 className="mb-4">Create New Ticket</h3>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="formTitle">
+                                <Form.Label>Title</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide ticket
+                                    title.</Form.Control.Feedback>
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formDescription">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={3}
-                                placeholder="Enter description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">Please provide ticket
-                                description.</Form.Control.Feedback>
-                        </Form.Group>
-                        <div className="button-container-two-sides">
-                            <Button variant="primary" type="submit">Create Ticket</Button>
-                            <Button variant="secondary" type="button" onClick={() => navigate(HOME)}>Back to
-                                Dashboard</Button>
-                        </div>
-                    </Form>
+                            <Form.Group className="mb-3" controlId="formDescription">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    placeholder="Enter description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">Please provide ticket
+                                    description.</Form.Control.Feedback>
+                            </Form.Group>
+                            <div className="button-container-two-sides">
+                                <Button variant="primary" type="submit">Create Ticket</Button>
+                                <Button variant="secondary" type="button" onClick={() => navigate(HOME)}>Back to
+                                    Dashboard</Button>
+                            </div>
+                        </Form>
+                    </div>
                 </div>
             </div>
         </div>
