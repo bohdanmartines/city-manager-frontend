@@ -78,7 +78,7 @@ export default function TicketDetails() {
         <div className="container-fluid">
             <div className="row justify-content-center">
                 <div className="col-12 col-md-6">
-                    <div className="container mt-4">
+                    <div className="mt-4">
                         <h3 className="mb-3">Ticket Details</h3>
                         <table className="table table-striped">
                             <tbody>
@@ -123,7 +123,7 @@ export default function TicketDetails() {
                             </tr>
                             </tbody>
                         </table>
-                        <div className="button-container-right">
+                        <div className="button-container-right mb-5">
                             <Button variant="secondary" type="button" onClick={() => navigate(HOME)}>Back to
                                 Dashboard</Button>
                         </div>
