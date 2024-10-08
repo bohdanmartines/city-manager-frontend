@@ -80,7 +80,7 @@ export default function DashboardComponent() {
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
-                <div className="col-12 col-md-7">
+                <div className="col-11 col-lg-8">
                     <div className="mt-4">
                         <h3 className="mb-2">Dashboard</h3>
                         <p className="lead">View existing tickets or create a new one <Link to={NEW_TICKET}>here</Link>.
