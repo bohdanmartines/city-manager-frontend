@@ -19,9 +19,7 @@ export default function App() {
     return (
         <div>
             <Header pageTitle="City Manager" logoSrc={logo} loggedIn={loggedIn} setLoggedIn={updateLoggedIn}/>
-            <div className="container-fluid">
-                <AppContent setLoggedIn={updateLoggedIn}/>
-            </div>
+            <AppContent setLoggedIn={updateLoggedIn}/>
         </div>
     );
 }
