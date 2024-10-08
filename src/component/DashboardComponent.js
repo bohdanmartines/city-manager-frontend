@@ -8,19 +8,26 @@ import {toLocaleDateString} from "../helper/date_utils";
 import {Pagination} from "react-bootstrap";
 import TicketStatusBadge from "./TicketStatusBadge";
 
+const SMALL_SCREEN_MIN_WIDTH = 576;
+
 export default function DashboardComponent() {
 
     const [tickets, setTickets] = useState([]);
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
-    const maxPages = 10;
+    const [maxPages, setMaxPages] = useState(5);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!isAuthenticated()) {
             navigate(LOGIN)
         } else {
+            getTickets();
+            return handleMaxPagesChange();
+        }
+
+        function getTickets() {
             request(
                 `ticket?page=${page}&size=${size}`,
                 "GET",
@@ -31,6 +38,23 @@ export default function DashboardComponent() {
             }).catch(() => {
                 navigate(ERROR);
             });
+        }
+
+        function handleMaxPagesChange() {
+            const updateMaxPages = () => {
+                if (window.innerWidth >= SMALL_SCREEN_MIN_WIDTH) { // Adjust the breakpoint as needed
+                    setMaxPages(10);
+                } else {
+                    setMaxPages(5);
+                }
+            };
+
+            // Initial check
+            updateMaxPages();    // Add event listener
+            window.addEventListener('resize', updateMaxPages);
+
+            // Clean up event listener on component unmount
+            return () => window.removeEventListener('resize', updateMaxPages);
         }
     }, [page, size, navigate])
 
@@ -65,8 +89,8 @@ export default function DashboardComponent() {
                             <div className="row">
                                 <Pagination className="col mt-2 mb-0" size="sm">
                                     <Pagination.First onClick={() => setPage(0)} disabled={page === 0}/>
-                                    <Pagination.Item onClick={() => handleJump(-10)}
-                                                     disabled={page < maxPages}>-10</Pagination.Item>
+                                    <Pagination.Item onClick={() => handleJump(-maxPages)}
+                                                     disabled={page < maxPages}>-{maxPages}</Pagination.Item>
                                     <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
                                     {getRelevantPages().map((value) => (
                                         <Pagination.Item
@@ -79,8 +103,8 @@ export default function DashboardComponent() {
                                     ))}
                                     <Pagination.Next onClick={() => setPage(page + 1)}
                                                      disabled={page === totalPages - 1}/>
-                                    <Pagination.Item onClick={() => handleJump(10)}
-                                                     disabled={page > totalPages - (maxPages + 1)}>+10</Pagination.Item>
+                                    <Pagination.Item onClick={() => handleJump(maxPages)}
+                                                     disabled={page > totalPages - (maxPages + 1)}>+{maxPages}</Pagination.Item>
                                     <Pagination.Last onClick={() => setPage(totalPages - 1)}
                                                      disabled={page === totalPages - 1}/>
                                 </Pagination>
