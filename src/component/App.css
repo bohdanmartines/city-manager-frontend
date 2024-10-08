@@ -6,6 +6,8 @@
 .App-title {
     font-size: 1.5em;
     margin-left: 10px;
+    margin-bottom: 0;
+    text-align: left;
 }
 
 .App-header {
