@@ -75,9 +75,9 @@ export default function TicketDetails() {
     }
 
     return (
-        <div>
-            <div className="row justify-content-md-center">
-                <div className="col-6">
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-6">
                     <div className="container mt-4">
                         <h3 className="mb-3">Ticket Details</h3>
                         <table className="table table-striped">
